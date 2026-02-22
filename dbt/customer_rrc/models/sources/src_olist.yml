@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    database: CUSTOMER_ANALYTICS
+    schema: RAW
+    tables:
+      - name: RAW_OLIST_CUSTOMERS
+      - name: RAW_OLIST_ORDERS
+      - name: RAW_OLIST_ORDER_ITEMS
+      - name: RAW_OLIST_ORDER_PAYMENTS
+      - name: RAW_OLIST_ORDER_REVIEWS
+      - name: RAW_OLIST_PRODUCTS
+      - name: RAW_OLIST_SELLERS
+      - name: RAW_OLIST_GEOLOCATION
+      - name: RAW_PRODUCT_CATEGORY_TRANSLATION
