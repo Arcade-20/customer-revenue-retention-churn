@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_olist__customers
+    description: "Staged customers data standardized from RAW_OLIST_CUSTOMERS."
+    columns:
+      - name: customer_id
+        description: "Primary customer identifier (order-level customer key)."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_unique_id
+        description: "Unique customer identifier across orders (customer lifetime key)."
+        tests:
+          - not_null
+
+  - name: stg_olist__orders
+    description: "Staged orders data standardized from RAW_OLIST_ORDERS."
+    columns:
+      - name: order_id
+        description: "Primary order identifier."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Customer identifier associated with the order."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__customers')
+              field: customer_id
+
+      - name: order_status
+        description: "Normalized order status."
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - created
+                - approved
+                - invoiced
+                - processing
+                - shipped
+                - delivered
+                - canceled
+                - unavailable

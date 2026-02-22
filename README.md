@@ -61,9 +61,17 @@ Loaded 9 source tables into Snowflake RAW schema:
 
 ## 🚀 Phase 3 — STAGING Layer (In Progress)
 
-- First model built:
-  - `stg_olist__customers`
-- Successfully materialized in Snowflake
+- Core staging models built:
+  - stg_olist__customers
+  - stg_olist__orders
+
+- Added model-level tests:
+  - Primary key uniqueness
+  - Not-null constraints
+  - Accepted value validation
+  - Foreign key relationship between orders and customers
+
+- All staging tests successfully validated using `dbt test`
 
 ---
 
