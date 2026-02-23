@@ -46,3 +46,90 @@ models:
                 - delivered
                 - canceled
                 - unavailable
+
+  - name: stg_olist__order_items
+    description: "Order items at (order_id, order_item_id) grain with standardized types."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: order_id
+      - name: order_item_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__products')
+              field: product_id
+      - name: seller_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__sellers')
+              field: seller_id
+
+  - name: stg_olist__order_payments
+    description: "Order payments at (order_id, payment_sequential) grain with cleaned payment fields."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: order_id
+      - name: payment_sequential
+        tests:
+          - not_null
+      - name: payment_type
+        tests:
+          - not_null
+
+  - name: stg_olist__order_reviews
+    description: "Order reviews with review score and timestamps."
+    columns:
+      - name: review_id
+        tests:
+          - not_null
+      - name: review_score
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  - name: stg_olist__products
+    description: "Products with category and physical attributes."
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_olist__sellers
+    description: "Sellers with standardized location fields."
+    columns:
+      - name: seller_id
+        tests:
+          - not_null
+          - unique
+      - name: seller_zip_code_prefix
+        tests:
+          - not_null
+
+  - name: stg_olist__geolocation
+    description: "Deduplicated geolocation at zip_code_prefix grain."
+    columns:
+      - name: zip_code_prefix
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_olist__product_category_translation
+    description: "Translation table mapping Portuguese product category names to English."
+    columns:
+      - name: product_category_name
+        tests:
+          - not_null
+          - unique
