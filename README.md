@@ -73,12 +73,17 @@ Loaded 9 source tables into Snowflake RAW schema:
 
 - All staging tests successfully validated using `dbt test`
 
----
+
+## Progress
+
+### ✅ Staging Layer Complete (RAW → STAGING)
+- Built staging models for all 9 Olist source tables
+- Standardized IDs, timestamps, and key fields for analytics readiness
+- Added core data quality tests (not_null, unique, relationships, accepted_values)
+- Verified dbt runs and tests against Snowflake
 
 ## 🔜 Next Steps
 
-- Complete remaining STAGING models
-- Add model-level tests
 - Build INTERMEDIATE customer metrics
 - Implement retention and churn logic
 - Create MART tables for reporting
