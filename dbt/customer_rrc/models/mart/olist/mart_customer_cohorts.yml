@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: mart_customer_cohorts
+    description: >
+      Customer cohort assignment (cohort_month = month of first order) plus lifecycle anchors
+      used downstream for retention and churn marts.
+
+    columns:
+      - name: customer_unique_id
+        description: Unique customer identifier at mart grain.
+        tests:
+          - not_null
+          - unique
+
+      - name: cohort_month
+        description: Month bucket for the customer's first order.
+        tests:
+          - not_null
+
+      - name: first_order_at
+        tests:
+          - not_null
+
+      - name: last_order_at
+        tests:
+          - not_null
+
+      - name: order_count
+        tests:
+          - not_null
+
+      - name: delivered_order_count
+        tests:
+          - not_null
+
+      - name: customer_active_days
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "first_order_at <= last_order_at"
+
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "order_count >= 1"
+
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "delivered_order_count <= order_count"
+
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "customer_active_days >= 1"
