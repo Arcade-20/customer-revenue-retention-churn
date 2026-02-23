@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: mart_customer_churn
+    description: >
+      Customer churn labeling mart using 90-day inactivity.
+      Uses deterministic as_of_date (max order_purchased_at) for reproducibility.
+    columns:
+      - name: customer_unique_id
+        tests:
+          - not_null
+          - unique
+
+      - name: as_of_date
+        tests:
+          - not_null
+
+      - name: last_order_at
+        tests:
+          - not_null
+
+      - name: days_since_last_order
+        tests:
+          - not_null
+
+      - name: churned_at
+        tests:
+          - not_null
+
+      - name: is_churned_90d
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "days_since_last_order >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "churned_at = dateadd('day', 90, last_order_at)"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(is_churned_90d = true and days_since_last_order >= 90) or (is_churned_90d = false and days_since_last_order < 90)"
