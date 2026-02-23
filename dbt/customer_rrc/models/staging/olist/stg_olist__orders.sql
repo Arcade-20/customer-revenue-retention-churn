@@ -1,6 +1,6 @@
 -- Create a standardized staging view for orders with normalized status and timestamps.
 with source as (
-    select * from {{ source('olist_raw', 'RAW_OLIST_ORDERS') }}
+    select * from {{ source('olist', 'RAW_OLIST_ORDERS') }}
 ),
 
 standardized as (

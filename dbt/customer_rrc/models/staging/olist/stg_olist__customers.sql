@@ -1,6 +1,6 @@
 -- Create a standardized staging view for customers with clean IDs and normalized location fields.
 with source as (
-    select * from {{ source('olist_raw', 'RAW_OLIST_CUSTOMERS') }}
+    select * from {{ source('olist', 'RAW_OLIST_CUSTOMERS') }}
 ),
 
 standardized as (

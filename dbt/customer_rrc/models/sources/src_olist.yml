@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: olist_raw
+  - name: olist
     database: CUSTOMER_ANALYTICS
     schema: RAW
     tables:
