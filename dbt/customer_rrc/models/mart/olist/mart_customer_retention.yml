@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: mart_customer_retention
+    description: >
+      Cohort retention matrix at cohort_month x activity_month grain.
+      Activity is based on distinct customer order months from int_orders.
+    columns:
+      - name: cohort_month
+        tests:
+          - not_null
+
+      - name: activity_month
+        tests:
+          - not_null
+
+      - name: months_since_cohort
+        tests:
+          - not_null
+
+      - name: cohort_customers
+        tests:
+          - not_null
+
+      - name: active_customers
+        tests:
+          - not_null
+
+      - name: retention_rate
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "months_since_cohort >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "cohort_customers >= 1"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "active_customers >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "active_customers <= cohort_customers"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "retention_rate >= 0 and retention_rate <= 1"
