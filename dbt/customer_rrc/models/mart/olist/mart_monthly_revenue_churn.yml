@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: mart_monthly_revenue_churn
+    description: >
+      Monthly payments split by churn segment (is_churned_90d) based on mart_customer_churn.
+    columns:
+      - name: order_month
+        tests:
+          - not_null
+          - unique
+
+      - name: total_payments
+        tests:
+          - not_null
+
+      - name: churned_customer_payments
+        tests:
+          - not_null
+
+      - name: active_customer_payments
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_payments >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "churned_customer_payments >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "active_customer_payments >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "abs(total_payments - (churned_customer_payments + active_customer_payments)) < 0.0001"
