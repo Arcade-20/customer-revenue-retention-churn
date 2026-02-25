@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: mart_kpi_summary
+    description: >
+      One-row executive KPI summary combining churn, retention window dates, and latest-month revenue metrics.
+    columns:
+      - name: as_of_date
+        tests: [not_null]
+      - name: total_customers
+        tests: [not_null]
+      - name: churn_rate_90d
+        tests: [not_null]
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_customers >= 1"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "churn_rate_90d >= 0 and churn_rate_90d <= 1"
