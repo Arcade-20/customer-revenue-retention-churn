@@ -209,7 +209,7 @@ Stored locally at:
 
 
 Password sourced from environment variable:
-export SNOWFLAKE_PASSWORD="Snowflakekeerthi@201202@"
+export SNOWFLAKE_PASSWORD="xxxxxxxxxxxxxxxxxxxxxxxx"
 
 
 ---
