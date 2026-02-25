@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: mart_monthly_revenue
+    description: >
+      Monthly revenue KPIs aggregated at order_month from int_orders and int_order_revenue.
+    columns:
+      - name: order_month
+        tests:
+          - not_null
+          - unique
+
+      - name: order_count
+        tests:
+          - not_null
+
+      - name: active_customers
+        tests:
+          - not_null
+
+      - name: total_gmv
+        tests:
+          - not_null
+
+      - name: total_payments
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "order_count >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "active_customers >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_gmv >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_payments >= 0"
