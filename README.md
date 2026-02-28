@@ -246,8 +246,37 @@ Planned dashboards:
 
 ---
 
-## 📌 Status
+## 📊 Power BI Dashboard
 
-Backend complete.  
-Production-grade modeling.  
-Visualization phase next.
+The final reporting layer was built in Power BI (Import Mode) using the MART schema from Snowflake.
+
+### Dashboard Pages:
+1. Executive Summary
+2. Revenue Analysis
+3. Cohort Retention
+4. Customer Value & Revenue Mix
+5. Churn Deep Dive
+
+### Key Features:
+- 90-day churn definition
+- Cohort-based retention matrix
+- Revenue attribution (active vs eventually churned customers)
+- Clean star-schema modeling (dim_cohort bridge)
+- Measures-first design, no calculated relationship hacks
+
+---
+
+## 📸 Dashboard Preview
+
+### Executive Summary
+![Executive Summary](assets/executive_summary.png)
+
+### Cohort Retention
+![Cohort Retention](assets/cohort_retention.png)
+
+### Customer Value & Revenue Mix
+![Revenue Mix](assets/revenue_mix.png)
+
+### Churn Deep Dive
+![Churn Deep Dive](assets/churn_deep_dive.png)  
+
