@@ -275,7 +275,7 @@ The final reporting layer was built in Power BI (Import Mode) using the MART sch
 ![Cohort Retention](assets/cohort_retention.png)
 
 ### Customer Value & Revenue Mix
-![Revenue Mix](assets/revenue_mix.png)
+[![Revenue Mix](assets/revenue_mix.png)](https://github.com/Arcade-20/customer-revenue-retention-churn/blob/main/dbt/customer_rrc/assets/Revenue%20Mix.jpeg)
 
 ### Churn Deep Dive
 [![Churn Deep Dive](assets/churn_deep_dive.png) ](https://github.com/Arcade-20/customer-revenue-retention-churn/blob/main/dbt/customer_rrc/assets/Churn%20Deep%20Dive.jpeg) 
