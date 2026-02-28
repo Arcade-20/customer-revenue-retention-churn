@@ -272,7 +272,7 @@ The final reporting layer was built in Power BI (Import Mode) using the MART sch
 ![Executive Summary](assets/executive_summary.png)
 
 ### Cohort Retention
-![Cohort Retention](assets/cohort_retention.png)
+[![Cohort Retention](assets/cohort_retention.png)](https://github.com/Arcade-20/customer-revenue-retention-churn/blob/main/dbt/customer_rrc/assets/Cohort%20Retention.jpeg)
 
 ### Customer Value & Revenue Mix
 [![Revenue Mix](assets/revenue_mix.png)](https://github.com/Arcade-20/customer-revenue-retention-churn/blob/main/dbt/customer_rrc/assets/Revenue%20Mix.jpeg)
